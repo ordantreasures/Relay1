@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     gemini_api_key: Optional[str] = None
     
     # CORS
-    cors_origins: List[str] = ["http://localhost:3000", "http://localhost:5173"]
+    cors_origins: List[str] = ["http://localhost:3000", "https://relaey.netlify.app/"]
     
     # Environment
     environment: str = "dev"
