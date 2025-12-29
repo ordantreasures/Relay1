@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     refresh_token_expire_days: int = 7
     
     # API Keys
-    gemini_api_key: Optional[str] = "AIzaSyB_VLZIB-VCkpipiwFGFWxvuwmmKNz2EQY"
+    gemini_api_key: Optional[str] = None
     
     # CORS
     cors_origins: List[str] = ["http://localhost:3000", "https://relaey.netlify.app/"]
