@@ -11,13 +11,13 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
     
     # Security
-    secret_key: str = "your-super-secret-jwt-key-change-this-in-production"
+    secret_key: str = "483f0ba336871d0c0489edb16c23d4d0"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
     refresh_token_expire_days: int = 7
     
     # API Keys
-    gemini_api_key: Optional[str] = None
+    gemini_api_key: Optional[str] = "AIzaSyB_VLZIB-VCkpipiwFGFWxvuwmmKNz2EQY"
     
     # CORS
     cors_origins: List[str] = ["http://localhost:3000", "https://relaey.netlify.app/"]

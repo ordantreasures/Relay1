@@ -52,7 +52,7 @@ class CRUDNotification(CRUDBase[Notification, NotificationCreate, BaseModel]):
         )
         
         db.add(db_obj)
-        await db.flush()
+        await db.commit()
         return db_obj
     
     async def mark_as_read(

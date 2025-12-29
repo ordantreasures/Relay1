@@ -1,7 +1,6 @@
-from typing import Optional, Dict, Any, Sequence,cast, Text
+from typing import Optional, Dict, Any, Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy import select, func, desc, or_, and_, update, exists
+from sqlalchemy import select, func, desc, or_, and_, update
 from sqlalchemy.orm import selectinload
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -57,8 +56,8 @@ class CRUDPost(CRUDBase[Post, PostCreate, PostUpdate]):
             db_obj.deadline = obj_in.deadline.replace(tzinfo=timezone.utc) if obj_in.deadline.tzinfo is None else obj_in.deadline
 
         db.add(db_obj)
-        await db.flush()
-
+        await db.commit()
+        await db.refresh(db_obj)
         return db_obj
     
     async def get_multi_filtered(
@@ -221,6 +220,9 @@ class CRUDPost(CRUDBase[Post, PostCreate, PostUpdate]):
                     upvotes_count=Post.upvotes_count + 1
                 )
             )
+            
+            await db.commit()
+            
             result = await db.execute(select(Post.upvotes_count).where(Post.id == post_id))
             count = result.scalar_one()
 
@@ -265,6 +267,8 @@ class CRUDPost(CRUDBase[Post, PostCreate, PostUpdate]):
                     saves_count=Post.saves_count + 1
                 )
             )
+            
+            await db.commit()
             result = await db.execute(select(Post.saves_count).where(Post.id == post_id))
             count = result.scalar_one()
 
@@ -323,6 +327,7 @@ class CRUDPost(CRUDBase[Post, PostCreate, PostUpdate]):
         await db.execute(
             update(Post).where(Post.id == post_id).values(views=Post.views + 1)
         )
+        await db.commit()
 
     async def get_saved_post(
          self, db: AsyncSession, user_id: uuid.UUID

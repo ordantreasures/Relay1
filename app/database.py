@@ -6,9 +6,12 @@ from .config import settings
 engine = create_async_engine(
     settings.database_url,
     echo=settings.environment == "dev",
-    pool_size=20,
-    max_overflow=30,
+    pool_size=5,
+    max_overflow=10,
+    pool_timeout=30,
+    pool_pre_ping=True,
 )
+
 
 # Create session factory
 AsyncSessionLocal = async_sessionmaker(
@@ -26,7 +29,6 @@ async def get_db():
     async with AsyncSessionLocal() as session:
         try:
             yield session
-            await session.commit()
         except Exception:
             await session.rollback()
             raise

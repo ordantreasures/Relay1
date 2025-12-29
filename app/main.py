@@ -1,5 +1,3 @@
-import os
-os.environ['PASSLIB_BUILTIN_BCRYPT_MAX_PASSWORD'] = '72'
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager

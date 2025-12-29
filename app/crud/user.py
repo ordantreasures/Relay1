@@ -40,7 +40,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         )
         
         db.add(db_obj)
-        await db.flush()
+        await db.commit()
         return db_obj
     
     async def authenticate(self, db: AsyncSession, email: str, password: str) -> Optional[User]:
