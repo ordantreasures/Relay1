@@ -14,4 +14,5 @@ python-dotenv==1.0.0
 google-generativeai==0.3.2
 celery==5.3.4
 email-validator==2.1.0
-asyncpg sqlalchemy[asyncio]
+asyncpg
+sqlalchemy[asyncio]
