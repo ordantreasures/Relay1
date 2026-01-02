@@ -1,3 +1,4 @@
+from operator import ge
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -5,7 +6,7 @@ import logging
 
 from .config import settings
 from .database import engine, Base
-from .api import auth, posts, users, communities, notifications
+from .api import auth, posts, users, communities, notifications, gemini
 from .middleware.cors import setup_cors
 from .core.errors import setup_exception_handlers
 
@@ -57,7 +58,7 @@ app.include_router(posts.router, prefix="/api/v1/posts", tags=["Posts"])
 app.include_router(users.router, prefix="/api/v1/users", tags=["Users"])
 app.include_router(communities.router, prefix="/api/v1/communities", tags=["Communities"])
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["Notifications"])
-
+app.include_router(gemini.router, prefix="/api/v1/ai", tags=["AI"])
 
 @app.get("/")
 async def root():
