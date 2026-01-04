@@ -53,12 +53,12 @@ setup_cors(app)
 setup_exception_handlers(app)
 
 # Include routers
-app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
-app.include_router(posts.router, prefix="/api/v1/posts", tags=["Posts"])
-app.include_router(users.router, prefix="/api/v1/users", tags=["Users"])
-app.include_router(communities.router, prefix="/api/v1/communities", tags=["Communities"])
-app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["Notifications"])
-app.include_router(gemini.router, prefix="/api/v1/ai", tags=["AI"])
+app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
+app.include_router(posts.router, prefix="/posts", tags=["Posts"])
+app.include_router(users.router, prefix="/users", tags=["Users"])
+app.include_router(communities.router, prefix="/communities", tags=["Communities"])
+app.include_router(notifications.router, prefix="/notifications", tags=["Notifications"])
+app.include_router(gemini.router, prefix="/ai", tags=["AI"])
 
 @app.get("/")
 async def root():
